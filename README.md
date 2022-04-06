@@ -1,11 +1,11 @@
-# fundo-investimentos
+# fundo-investimentos-app
 App fundo de investimentos
 
 ### Clonar repositório
 
 ```shell
-git clone https://github.com/jmdjean/fundo-investimentos.git
-cd fundo-investimentos
+git clone https://github.com/jmdjean/fundo-investimentos-app.git
+cd fundo-investimentos-app
 ```
 
 ### Instalar os pacotes
