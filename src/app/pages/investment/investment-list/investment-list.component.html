@@ -1,1 +1,9 @@
 <p>investment-list works!</p>
+
+<div *ngFor="let investment of investments">
+  <ul>
+    <li>{{investment.nome}}</li>
+    <li>{{investment.objetivo}}</li>
+    <li>{{investment.saldoTotal}}</li>
+  </ul>
+</div>
