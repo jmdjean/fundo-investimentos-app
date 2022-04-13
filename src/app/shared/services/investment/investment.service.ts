@@ -1,26 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
 import { IInvestment } from '../../../core/interfaces/investment.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InvestmentService {
-
   private suffixUrl = 'ca4ec77d-b941-4477-8a7f-95d4daf7a653';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<Array<IInvestment>> {
     const url = environment.url;
 
     return this.http.get(url + this.suffixUrl).pipe(
-      map((res) => this.dataToResourceModelData(res)),
-      catchError((error) => this.handleError(error))
+      map((res: any) => this.dataToResourceModelData(res)),
+      catchError((error: any) => this.handleError(error))
     );
   }
 
