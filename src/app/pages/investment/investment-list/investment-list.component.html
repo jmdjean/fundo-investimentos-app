@@ -1,0 +1,29 @@
+<div class="spinner" *ngIf="loadingInvestments">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loadingInvestments" class="grid-listagem">
+  <h1>Investimentos</h1>
+
+  <div>
+    <table mat-table [dataSource]="investments" class="mat-elevation-z8 demo-table">
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let investment">{{investment.nome}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="objetivo">
+        <th mat-header-cell *matHeaderCellDef>Objetivo</th>
+        <td mat-cell *matCellDef="let investment">{{investment.objetivo}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="saldoTotal">
+        <th mat-header-cell *matHeaderCellDef>Saldo Total</th>
+        <td mat-cell *matCellDef="let investment">R$ {{investment.saldoTotal}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row (click)="goToPageOfDetailsInvestment(investment.nome)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
