@@ -32,7 +32,7 @@ export class InvestmentListComponent implements OnInit {
     });
   }
 
-  goToPageOfDetailsInvestment(investmentName: string): void{
-    this.router.navigate(['', investmentName]);
+  goToPageOfDetailsInvestment(selectedRow: any): void{
+    this.router.navigate(['', selectedRow]);
   }
 }
