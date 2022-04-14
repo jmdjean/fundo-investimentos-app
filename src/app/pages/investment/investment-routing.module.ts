@@ -6,7 +6,7 @@ import { InvestmentListComponent } from './investment-list/investment-list.compo
 
 const routes: Routes = [
   { path: '', component: InvestmentListComponent},
-  { path: ':selectedRow', component: InvestmentDetailsComponent}
+  { path: ':nome', component: InvestmentDetailsComponent}
 ];
 
 @NgModule({

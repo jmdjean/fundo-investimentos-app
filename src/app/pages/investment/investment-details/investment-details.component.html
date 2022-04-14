@@ -1,31 +1,64 @@
-
-
-<div class="spinner" *ngIf="loadingInvestment">
+<div class="spinner" *ngIf="loadingInfo">
   <mat-spinner></mat-spinner>
 </div>
 
-<div *ngIf="!loadingInvestment" class="grid-listagem">
-  <h1>Dados do Investimento</h1>
-
+<div *ngIf="!loadingInfo" class="grid-listagem">
   <div>
-    <table mat-table [dataSource]="investment" class="mat-elevation-z8">
-      <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell *matCellDef="let investment">{{investment.nome}}</td>
-      </ng-container>
+    <h1>Dados do Investimento</h1>
 
-      <ng-container matColumnDef="objetivo">
-        <th mat-header-cell *matHeaderCellDef>Objetivo</th>
-        <td mat-cell *matCellDef="let investment">{{investment.objetivo}}</td>
-      </ng-container>
+    <div>
+      <table mat-table [dataSource]="[investment]" class="mat-elevation-z8 demo-table">
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let investment">{{investment.nome}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="saldoTotal">
-        <th mat-header-cell *matHeaderCellDef>Saldo Total</th>
-        <td mat-cell *matCellDef="let investment">R$ {{investment.saldoTotal}}</td>
-      </ng-container>
+        <ng-container matColumnDef="objetivo">
+          <th mat-header-cell *matHeaderCellDef>Objetivo</th>
+          <td mat-cell *matCellDef="let investment">{{investment.objetivo}}</td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+        <ng-container matColumnDef="saldoTotal">
+          <th mat-header-cell *matHeaderCellDef>Saldo Total</th>
+          <td mat-cell *matCellDef="let investment">{{investment.saldoTotal | currency}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="margin-top-20">
+    <h1>Resgate de Investimento</h1>
+
+    <div>
+      <!-- <form [formGroup]="form" autocomplete="off">
+        <ng-container formArrayName="acoes">
+
+          <mat-table [dataSource]="acoesControl.controls">
+
+            <ng-container matColumnDef="nome">
+              <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.get('nome').value}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="percentual">
+              <mat-header-cell *matHeaderCellDef> saldo a resgatar </mat-header-cell>
+              <mat-cell *matCellDef="let element;" [formGroup]="element">
+                <mat-form-field floatLabel="never" (selectionChange)="onChangeResgate($event, element)" >
+                  <input matInput placeholder="Valor do resgate" formControlName="percentual">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsAcoes"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumnsAcoes;"></mat-row>
+
+          </mat-table>
+
+        </ng-container>
+      </form> -->
+    </div>
   </div>
 </div>

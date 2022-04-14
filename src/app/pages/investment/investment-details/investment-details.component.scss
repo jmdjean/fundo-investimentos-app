@@ -1,0 +1,9 @@
+.mat-column-id {
+  max-width: 40px;
+}
+.mat-column-title,
+.mat-column-userId {
+  .mat-form-field {
+    width: calc(100% - 15px);
+  }
+}
