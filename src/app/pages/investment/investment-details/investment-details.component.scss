@@ -1,0 +1,21 @@
+.mat-column-id {
+  max-width: 40px;
+}
+.mat-column-title,
+.mat-column-userId {
+  .mat-form-field {
+    width: calc(100% - 15px);
+  }
+}
+
+.actions-buttons {
+  margin: 20px;
+  margin-bottom: 20px;
+  align-items: right;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    margin-right: 15px;
+  }
+}

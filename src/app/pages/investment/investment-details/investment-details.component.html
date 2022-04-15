@@ -1,1 +1,97 @@
-<p>investment-details works!</p>
+<div class="spinner" *ngIf="loadingInfo">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loadingInfo" class="grid-listagem">
+  <div>
+    <h1>Dados do Investimento</h1>
+
+    <div>
+      <table mat-table [dataSource]="[investment]" class="mat-elevation-z8 demo-table">
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let investment">{{investment.nome}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="objetivo">
+          <th mat-header-cell *matHeaderCellDef>Objetivo</th>
+          <td mat-cell *matCellDef="let investment">{{investment.objetivo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="saldoTotal">
+          <th mat-header-cell *matHeaderCellDef>Saldo Total</th>
+          <td mat-cell *matCellDef="let investment">{{investment.saldoTotal | currency}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="margin-top-35">
+    <h1>Resgate de Investimento</h1>
+
+    <div>
+      <form #form="ngForm" (ngSubmit)="form.form.valid" novalidate>
+        <mat-table [dataSource]="acoesDataSource">
+
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="saldoAcumulado">
+            <mat-header-cell *matHeaderCellDef> Saldo acumulado </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.saldoAcumulado | currency}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="valorResgate">
+            <mat-header-cell *matHeaderCellDef>
+              Valor a resgatar
+            </mat-header-cell>
+            <mat-cell *matCellDef="let acao; let rowIdx = index;">
+              <mat-form-field>
+                <mat-label>Digite o valor do resgate</mat-label>
+                <input matInput autocomplete="off" type="textbox" appTwoDigitDecimaNumber #valorResgate="ngModel"
+                  name="txtName{{rowIdx}}" [(ngModel)]="acao.valorResgate"
+                  (ngModelChange)="checkAmountValueToWithdraw(acao)">
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="valorValido">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+              <mat-icon *ngIf="element.valorValido" aria-hidden="false" aria-label="" style="color:green">check_circle
+              </mat-icon>
+
+              <div *ngIf="!element.valorValido">
+                <mat-icon aria-hidden="false" aria-label="" style="color:red">info</mat-icon>
+                <div>Valor de resgate é maior que o saldo da ação.</div>
+              </div>
+
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsAcoes"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsAcoes; let i = index;"></mat-row>
+        </mat-table>
+
+        <div>
+          <mat-card>Valor total do resgate: {{ amountToWithdraw | currency}} </mat-card>
+        </div>
+
+        <div class="actions-buttons">
+          <button mat-button (click)="goBackToListOfInvestimentsPage()">
+            voltar
+          </button>
+          <button mat-raised-button color="primary" (click)="saveForm()">
+            salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
