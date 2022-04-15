@@ -29,36 +29,69 @@
     </div>
   </div>
 
-  <div class="margin-top-20">
+  <div class="margin-top-35">
     <h1>Resgate de Investimento</h1>
 
     <div>
-      <!-- <form [formGroup]="form" autocomplete="off">
-        <ng-container formArrayName="acoes">
+      <form #form="ngForm" (ngSubmit)="form.form.valid" novalidate>
+        <mat-table [dataSource]="acoesDataSource">
 
-          <mat-table [dataSource]="acoesControl.controls">
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="nome">
-              <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.get('nome').value}} </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="saldoAcumulado">
+            <mat-header-cell *matHeaderCellDef> Saldo acumulado </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.saldoAcumulado | currency}} </mat-cell>
+          </ng-container>
 
-            <ng-container matColumnDef="percentual">
-              <mat-header-cell *matHeaderCellDef> saldo a resgatar </mat-header-cell>
-              <mat-cell *matCellDef="let element;" [formGroup]="element">
-                <mat-form-field floatLabel="never" (selectionChange)="onChangeResgate($event, element)" >
-                  <input matInput placeholder="Valor do resgate" formControlName="percentual">
-                </mat-form-field>
-              </mat-cell>
-            </ng-container>
+          <ng-container matColumnDef="valorResgate">
+            <mat-header-cell *matHeaderCellDef>
+              Valor a resgatar
+            </mat-header-cell>
+            <mat-cell *matCellDef="let acao; let rowIdx = index;">
+              <mat-form-field>
+                <mat-label>Digite o valor do resgate</mat-label>
+                <input matInput autocomplete="off" type="textbox" appTwoDigitDecimaNumber #valorResgate="ngModel"
+                  name="txtName{{rowIdx}}" [(ngModel)]="acao.valorResgate"
+                  (ngModelChange)="checkAmountValueToWithdraw(acao)">
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumnsAcoes"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumnsAcoes;"></mat-row>
+          <ng-container matColumnDef="valorValido">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
 
-          </mat-table>
+              <mat-icon *ngIf="element.valorValido" aria-hidden="false" aria-label="" style="color:green">check_circle
+              </mat-icon>
 
-        </ng-container>
-      </form> -->
+              <div *ngIf="!element.valorValido">
+                <mat-icon aria-hidden="false" aria-label="" style="color:red">info</mat-icon>
+                <div>Valor de resgate é maior que o saldo da ação.</div>
+              </div>
+
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsAcoes"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsAcoes; let i = index;"></mat-row>
+        </mat-table>
+
+        <div>
+          <mat-card>Valor total do resgate: {{ amountToWithdraw | currency}} </mat-card>
+        </div>
+
+        <div class="actions-buttons">
+          <button mat-button (click)="goBackToListOfInvestimentsPage()">
+            voltar
+          </button>
+          <button mat-raised-button color="primary" (click)="saveForm()">
+            salvar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

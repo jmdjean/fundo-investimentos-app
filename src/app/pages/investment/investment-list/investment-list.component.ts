@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { IndicadorCarenciaEnum } from '../../../core/enums/indicador-carencia.enum';
 import { IInvestment } from '../../../core/interfaces/investment.interface';
-import { InvestmentService } from '../../../shared/services/investment/investment.service';
+import { NotificationService } from '../../../core/services/common/notification.service';
+import { InvestmentService } from '../../../core/services/investiments/investment.service';
 
 @Component({
   selector: 'app-investment-list',
@@ -19,7 +19,7 @@ export class InvestmentListComponent implements OnInit {
   constructor(
     private investmentService: InvestmentService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +33,8 @@ export class InvestmentListComponent implements OnInit {
         this.investments = res;
         this.loadingInvestments = false;
       },
-      (error) => {
+      () => {
+        this.notificationService.openSnackBar('Não foi possivel listar os investimentos');
         this.loadingInvestments = false;
       }
     );
@@ -43,15 +44,7 @@ export class InvestmentListComponent implements OnInit {
     if (investment.indicadorCarencia === IndicadorCarenciaEnum.N) {
       this.router.navigate(['investments', investment.nome]);
     } else {
-      this.openSnackBar('Investimento não pode ser editado');
+      this.notificationService.openSnackBar('Investimento não pode ser editado');
     }
-  }
-
-  private openSnackBar(message: string) {
-    this.snackBar.openFromComponent(InvestmentListComponent, {
-      duration: 10000,
-    });
-
-    this.snackBar.open(message, 'fechar');
   }
 }
