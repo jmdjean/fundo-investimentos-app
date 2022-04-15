@@ -73,7 +73,7 @@ export class InvestmentDetailsComponent implements OnInit {
       width: '400px',
       data: {
         title: this.investmentName,
-        message: `Resgate total de ${this.amountToWithdraw}, efetuado com sucesso!`,
+        message: 'Resgate efetuado com sucesso!'
       },
     });
 
