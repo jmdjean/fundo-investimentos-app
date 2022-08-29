@@ -27,13 +27,6 @@ export class InvestmentListComponent implements OnInit {
     this.getAllInvestments();
   }
 
-  addCondition(){
-    this.condicoes.push({
-      nome: `Condição ${(this.condicoes.length + 1).toString()}`,
-      posicao: this.condicoes.length + 1
-    })
-  }
-
   getAllInvestments(): void {
     this.loadingInvestments = true;
     this.investmentService.getAll().subscribe(
