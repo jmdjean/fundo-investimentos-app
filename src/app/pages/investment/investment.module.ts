@@ -37,9 +37,7 @@ import { InvestmentRoutingModule } from './investment-routing.module';
     MatButtonModule,
     MatDialogModule,
     MatCardModule,
-    DialogInfoModule,
-    MatExpansionModule,
-    MatChipsModule
+    DialogInfoModule
   ]
 })
 export class InvestmentModule {}

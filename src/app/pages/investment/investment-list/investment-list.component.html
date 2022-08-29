@@ -1,4 +1,4 @@
-<!-- <div class="spinner" *ngIf="loadingInvestments">
+ <div class="spinner" *ngIf="loadingInvestments">
   <mat-spinner></mat-spinner>
 </div>
 
@@ -26,47 +26,4 @@
       <tr mat-row (click)="goToPageOfDetailsInvestment(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-</div> -->
-<div class="condicoes">
-  <mat-accordion>
-    <div *ngFor="let condicao of condicoes" class="condicao">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-              <div class="tag-condicao">{{condicao.nome}}</div>
-          </mat-panel-title>
-          <mat-panel-description>
-
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>  AQUI VAI A EDIÇÃO AVANÇADA DE PREÇO</p>
-      </mat-expansion-panel>
-      <br>
-      <div>
-        <mat-icon class="material-icons icon-theme mouse-hover" style="margin-right: 10px" (click)="addCondition()">add_circle</mat-icon>
-        <mat-icon class="material-icons icon-theme mouse-hover">arrow_upward</mat-icon>
-        <mat-icon class="material-icons icon-theme mouse-hover">arrow_downward</mat-icon>
-        <mat-icon class="material-icons icon-theme mouse-hover" style="margin-left: 10px">delete_forever</mat-icon>
-      </div>
-    </div>
-    <!-- <div class="condicao">
-      <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <div class="tag-condicao">CONDIÇÃO 2</div>
-            </mat-panel-title>
-            <mat-panel-description>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p></p>
-        </mat-expansion-panel>
-        <br>
-        <div>
-          <mat-icon class="material-icons icon-theme mouse-hover" style="margin-right: 10px">add_circle</mat-icon>
-          <mat-icon class="material-icons icon-theme mouse-hover">arrow_upward</mat-icon>
-          <mat-icon class="material-icons icon-theme mouse-hover">arrow_downward</mat-icon>
-          <mat-icon class="material-icons icon-theme mouse-hover" style="margin-left: 10px">delete_forever</mat-icon>
-        </div>
-    </div> -->
-  </mat-accordion>
 </div>

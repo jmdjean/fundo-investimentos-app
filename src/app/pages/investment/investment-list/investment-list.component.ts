@@ -16,7 +16,6 @@ export class InvestmentListComponent implements OnInit {
   public investments: Array<IInvestment> = [];
   public loadingInvestments = false;
   panelOpenState = false;
-  condicoes: any[] = [];
 
   constructor(
     private investmentService: InvestmentService,
@@ -26,14 +25,6 @@ export class InvestmentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllInvestments();
-    this.fillConditions();
-  }
-
-  fillConditions(){
-    this.condicoes = [{
-      nome: 'Condição 1',
-      posicao: 1
-    }];
   }
 
   addCondition(){
